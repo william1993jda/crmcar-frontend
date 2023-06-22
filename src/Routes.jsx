@@ -1,7 +1,7 @@
 
 import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Progress } from "./components/CircularProgress";
+import Progress from "./view/components/progress";
 
 export default function UrlRoutes() {
   return (
