@@ -1,10 +1,10 @@
 import { actionTypes } from "../actions/alert.action"
 
 const initialState = {
-    open: true,
+    open: false,
     class: 'success',
     time: 3000,
-    msg: 'Dados atualizados'
+    msg: ''
 }
 
 export default (state = initialState, { type, payload }) => {

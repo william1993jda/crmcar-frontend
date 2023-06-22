@@ -9,6 +9,11 @@ export default function Alert() {
     // pegando o estado do reducer
     const alert = useSelector(state => state.alertReducer)
 
+    if (alert.open) {
+        setTimeout(() => dispatch(changeAlert({open: false})), alert.time)
+    }
+    
+
     return (
         <Modal
             open={alert.open}
@@ -16,7 +21,7 @@ export default function Alert() {
             className={'d-flex flex-column align-items-center justify-content-center h-100'}
         >
             <Box className="bg-white rounded d-flex align-items-center p-4 gap-2">
-                
+
                 { alert.class === 'success' && <MdCheckCircle style={{fontSize: '2.5rem'}} className="text-success" /> }
                 { alert.class === 'error' && <MdError style={{fontSize: '2.5rem'}} className="text-danger" /> }
 
