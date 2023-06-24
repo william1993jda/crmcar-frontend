@@ -26,7 +26,6 @@ export default function Auth() {
                             value={credentials.email}
                             onChange={text => dispatch(changeOauth({email: text.target.value}))}
                             variant="outlined"
-                            id="outlined-basic"
                         />
                         <TextField
                             label="Senha"
@@ -35,7 +34,6 @@ export default function Auth() {
                             value={credentials.password}
                             onChange={text => dispatch(changeOauth({password: text.target.value}))}
                             variant="outlined"
-                            id="outlined-basic"
                         />
                         <Button
                             variant="contained"
