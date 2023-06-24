@@ -1,7 +1,17 @@
-import { TextField, Typography, Box, Button } from "@material-ui/core"
+import { TextField, Typography, Box, Button, withStyles } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux";
 import { changeOauth, login } from "../../store/actions/oauth.action";
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
+
+const RegisterButton = withStyles({
+    root: {
+        color: '#fff',
+        backgroundColor: '#28a745',
+        '&:hover': {
+            backgroundColor: '#218828',
+        }
+    }
+})(Button)
 
 export default function Auth() {
     const dispatch = useDispatch();
@@ -44,6 +54,16 @@ export default function Auth() {
                         >
                             Entrar
                         </Button>
+
+                        <RegisterButton
+                            component={Link}
+                            to='/register'
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                        >
+                            Cadastrar
+                        </RegisterButton>
                         {success && <Navigate to="/vehicles" />}
                     </Box>
                 </Box>

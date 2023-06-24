@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@material-ui/core"
+import { Box, Button, TextField, Typography, withStyles } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
 import { changeRegister, register } from "../../../store/actions/register.action";
 import { Link, Navigate } from "react-router-dom";
@@ -72,6 +72,7 @@ const { user, error, success } = useSelector(state => state.registerReducer)
                         >
                             Cadastrar
                         </Button>
+
                         <Box className="text-center">
                             <Link to='/login'>
                                 Fazer login
