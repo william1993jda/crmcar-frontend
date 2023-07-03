@@ -18,7 +18,7 @@ export default function UrlRoutes() {
           <Route path="/login" element={<Auth />} />
           <Route path="/register" element={<Register />} />
           <Route path="/vehicles" element={<Vehicles />} />
-          <Route path="/vehicles/:id/edit" element={<VehicleEdit />} />
+          {/* <Route path="/vehicles/:id/edit" element={<VehicleEdit />} /> */}
           <Route path="/vehicles/create" element={<VehicleEdit />} />
           <Route path="*" element={<><h1>Ops, você está perdido...</h1></>} />
         </Routes>
