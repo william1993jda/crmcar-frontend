@@ -66,6 +66,7 @@ export default function Auth() {
                         </RegisterButton>
                         {success && <Navigate to="/vehicles" />}
                     </Box>
+                    <Link to='/vehicles/create'>Acessar o teste</Link>
                 </Box>
             </Box>
         </Box>
