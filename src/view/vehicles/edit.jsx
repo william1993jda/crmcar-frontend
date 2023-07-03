@@ -287,6 +287,32 @@ export default function VehicleEdit() {
                                         <strong className="text-danger">{data.error.vehicle_regdate[0]}</strong>
                                     }
                                 </Box>
+                                <Box className="col-4 d-flex flex-column form-row mt-3">
+                                    <label className="label-custom mb-2 text-uppercase">Versão</label>
+                                    <Select
+                                        error={data.error.vehicle_version && true}
+                                        value={data.vehicle.vehicle_version || 0}
+                                        variant="outlined"
+                                        onChange={e => {
+                                            dispatch(change({
+                                                vehicle_version: e.target.value
+                                            }))
+
+                                            if(data.error.vehicle_version) {
+                                                delete data.error.vehicle_version
+                                            }
+                                        }}
+                                    >
+                                    
+                                    {data.vehicle_version.map(item => (
+                                        <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
+                                    ))}
+
+                                    </Select>
+                                    {(data.error.vehicle_version) && 
+                                        <strong className="text-danger">{data.error.vehicle_version[0]}</strong>
+                                    }
+                                </Box>
 
                             </Box>
                         </Box>
