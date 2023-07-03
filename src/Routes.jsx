@@ -7,6 +7,7 @@ import Progress from "./view/components/progress";
 const Auth = lazy(() => import('./view/auth'))
 const Register = lazy(() => import('./view/components/register/Register'))
 const Vehicles = lazy(() => import('./view/vehicles'))
+const VehicleEdit = lazy(() => import('./view/vehicles/edit'))
 
 export default function UrlRoutes() {
   return (
@@ -17,6 +18,8 @@ export default function UrlRoutes() {
           <Route path="/login" element={<Auth />} />
           <Route path="/register" element={<Register />} />
           <Route path="/vehicles" element={<Vehicles />} />
+          <Route path="/vehicles/:id/edit" element={<VehicleEdit />} />
+          <Route path="/vehicles/create" element={<VehicleEdit />} />
           <Route path="*" element={<><h1>Ops, você está perdido...</h1></>} />
         </Routes>
       </Suspense>

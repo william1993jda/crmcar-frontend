@@ -4,6 +4,7 @@ import notifyReducer from './notify.reducer'
 import alertReducer from "./alert.reducer";
 import oauthReducer from "./oauth.reducer";
 import registerReducer from "./register.reducer";
+import vehiclesReducer from "./vehicles.reducer";
 
 const rootReducer = combineReducers({
     loadingReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     alertReducer,
     oauthReducer,
     registerReducer,
+    vehiclesReducer
 })
 
 export default rootReducer

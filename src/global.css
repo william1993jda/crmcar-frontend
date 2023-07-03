@@ -2,6 +2,10 @@
     outline: none !important;
 }
 
+body {
+    background-color: #eee;
+}
+
 a, a:hover {
     text-decoration: none !important;
 }
@@ -47,4 +51,17 @@ header .header .dropdown-item {
 .menu-mobile svg {
     font-size: 22px;
     color: #444;
+}
+
+.label-custom {
+    color: #2c2c31;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.card {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(153, 153, 153, 0.2) 0 2px 4px 0;
+    border-radius: 3px;
+    border: none;
 }
