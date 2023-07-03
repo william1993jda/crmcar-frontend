@@ -164,7 +164,7 @@ export default function VehicleEdit() {
                         <h3>Dados do veículo</h3>
                         <Box className="card card-body">
                             <Box className="row">
-                                <Box className="col-md-7 d-flex flex-column form-row">
+                                <Box className="col-md-12 d-flex flex-column form-row">
                                     <label className="label-custom mb-2 text-uppercase">Categoria</label>
                                     <Select
                                         error={data.error.vehicle_type && true}
@@ -200,7 +200,7 @@ export default function VehicleEdit() {
                                     }
                                 </Box>
 
-                                <Box className="col-md-7 d-flex flex-column form-row">
+                                <Box className="col-md-4 d-flex flex-column form-row my-3">
                                     <label className="label-custom mb-2 text-uppercase">Marcas</label>
                                     <Select
                                         error={data.error.vehicle_brand && true}
@@ -231,23 +231,23 @@ export default function VehicleEdit() {
                                 </Box>
 
 
-                                <Box className="col-5 d-flex flex-column form-row">
+                                <Box className="col-4 d-flex flex-column form-row my-3">
                                     <label className="label-custom mb-2 text-uppercase">Modelos</label>
                                     <Select
                                         error={data.error.vehicle_model && true}
                                         value={data.vehicle.vehicle_model || 0}
                                         variant="outlined"
-                                        // onChange={e => {
-                                        //     dispatch(change({
-                                        //         vehicle_model: e.target.value,
-                                        //         vehicle_version: null,
-                                        //     }))
+                                        onChange={e => {
+                                            dispatch(change({
+                                                vehicle_model: e.target.value,
+                                                vehicle_version: null,
+                                            }))
 
-                                            // dispatch(version(data.vehicle.vehicle_brand, e.target.value))
-                                            // if(data.error.vehicle_model) {
-                                            //     delete data.error.vehicle_model
-                                            // }
-                                        // }}
+                                            dispatch(version(data.vehicle.vehicle_brand, e.target.value))
+                                            if(data.error.vehicle_model) {
+                                                delete data.error.vehicle_model
+                                            }
+                                        }}
                                     >
                                     
                                     {data.vehicle_model.map(item => (
@@ -261,11 +261,11 @@ export default function VehicleEdit() {
                                     }
                                 </Box>
                                 
-                                <Box className="col-12 d-flex flex-column form-row">
+                                <Box className="col-4 d-flex flex-column form-row mt-3">
                                     <label className="label-custom mb-2 text-uppercase">Ano do modelo</label>
                                     <Select
                                         error={data.error.vehicle_regdate && true}
-                                        value={data.vehicle.vehicle_regdate}
+                                        value={data.vehicle.vehicle_regdate || 0}
                                         variant="outlined"
                                         onChange={e => {
                                             dispatch(change({
