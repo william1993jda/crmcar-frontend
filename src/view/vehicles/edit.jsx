@@ -114,7 +114,7 @@ export default function VehicleEdit() {
                                     </Box>
                                 </Box>
                                 
-                                <Box className="col-sm-8 col-md-8 col-lg-10 col-xl-10">
+                                <Box className="col-sm-8 col-md-8 col-lg-10 col-xl-10 col-xxl-10">
                                     <Box className="d-flex flex-column mb-3">
                                         <label className="label-custom text-uppercase mb-2">CIDADE</label>
                                         <TextField 
@@ -128,7 +128,7 @@ export default function VehicleEdit() {
                                         }
                                     </Box>
                                 </Box>
-                                <Box className="col-sm-4 col-md-4 col-lg-2 col-xl-2">
+                                <Box className="col-sm-4 col-md-4 col-lg-2 col-xl-2 col-xxl-2">
                                     <Box className="d-flex flex-column mb-3">
                                         <label className="label-custom text-uppercase mb-2">Estado</label>
                                         <TextField 
@@ -142,34 +142,34 @@ export default function VehicleEdit() {
                                         }
                                     </Box>
                                 </Box>
-                                <Box className="col-6">
-                                    <Box className="d-flex flex-column mb-3">
-                                        <label className="label-custom text-uppercase mb-2">Rua</label>
-                                        <TextField 
-                                            error={data.error.logradouro && true}
-                                            disabled
-                                            value={data.vehicle.logradouro || ''}
-                                            variant="outlined"
-                                        />
-                                        {(data.error.logradouro) && 
-                                            <strong className="text-danger">{data.error.logradouro[0]}</strong>
-                                        }
-                                    </Box>
-                                </Box>
-                                <Box className="col-6">
-                                    <Box className="d-flex flex-column mb-3">
-                                        <label className="label-custom text-uppercase mb-2">Bairro</label>
-                                        <TextField 
-                                            error={data.error.bairro && true}
-                                            disabled
-                                            value={data.vehicle.bairro || ''}
-                                            variant="outlined"
-                                        />
-                                        {(data.error.bairro) && 
-                                            <strong className="text-danger">{data.error.bairro[0]}</strong>
-                                        }
-                                    </Box>
-                                </Box>
+                                {/*<Box className="col-6">*/}
+                                {/*    <Box className="d-flex flex-column mb-3">*/}
+                                {/*        <label className="label-custom text-uppercase mb-2">Rua</label>*/}
+                                {/*        <TextField */}
+                                {/*            error={data.error.logradouro && true}*/}
+                                {/*            disabled*/}
+                                {/*            value={data.vehicle.logradouro || ''}*/}
+                                {/*            variant="outlined"*/}
+                                {/*        />*/}
+                                {/*        {(data.error.logradouro) && */}
+                                {/*            <strong className="text-danger">{data.error.logradouro[0]}</strong>*/}
+                                {/*        }*/}
+                                {/*    </Box>*/}
+                                {/*</Box>*/}
+                                {/*<Box className="col-6">*/}
+                                {/*    <Box className="d-flex flex-column mb-3">*/}
+                                {/*        <label className="label-custom text-uppercase mb-2">Bairro</label>*/}
+                                {/*        <TextField */}
+                                {/*            error={data.error.bairro && true}*/}
+                                {/*            disabled*/}
+                                {/*            value={data.vehicle.bairro || ''}*/}
+                                {/*            variant="outlined"*/}
+                                {/*        />*/}
+                                {/*        {(data.error.bairro) && */}
+                                {/*            <strong className="text-danger">{data.error.bairro[0]}</strong>*/}
+                                {/*        }*/}
+                                {/*    </Box>*/}
+                                {/*</Box>*/}
                             </Box>  
                         </Box>
                     </Box>
