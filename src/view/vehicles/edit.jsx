@@ -522,18 +522,18 @@ export default function VehicleEdit() {
                                             {data.features.map(item => (item.vehicle_type_id === data.vehicle.vehicle_type) && (
                                                 <Box className="col-6" key={item.id}>
                                                     <Box className="d-flex flex-column mb-3">
-                                                        <FormControlLabel 
+                                                        <FormControlLabel
                                                             control={
-                                                                <Checkbox 
-                                                                    checked={data.vehicle.vehicle_features[item.velue] ? true: false}
+                                                                <Checkbox
+                                                                    checked={data.vehicle.vehicle_features[item.value] ? true : false}
                                                                     onChange={() => {
-                                                                        let checked = data.vehicle.vehicle_features[item.velue]?
-                                                                        delete data.vehicle.vehicle_features[item.velue] :
-                                                                        {[item.value] : item}
-                                                                        dispatch(change({vehicle_features: {
+                                                                        let checked = data.vehicle.vehicle_features[item.value] ? 
+                                                                            delete data.vehicle.vehicle_features[item.value] : 
+                                                                            {[item.value] : item}
+                                                                        dispatch(change({ vehicle_features: {
                                                                             ...data.vehicle.vehicle_features,
                                                                             ...checked
-                                                                        }}))
+                                                                        } }))
                                                                     }}
                                                                 />
                                                             }
@@ -541,8 +541,7 @@ export default function VehicleEdit() {
                                                         />
                                                     </Box>
                                                 </Box>
-                                            ))}
-                                            
+                                            ))} 
                                         </Box>
                                     </Box>
                                 </Box>
