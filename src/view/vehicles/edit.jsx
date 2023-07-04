@@ -177,7 +177,6 @@ export default function VehicleEdit() {
                 
                 <Box className="col-12">
                     <Box className="d-flex justify-content-center">
-                    
                         <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle ${window.innerWidth < 577 ? 'w-100': 'w-50'}`}>
                             <h3>Dados do veículo</h3>
                             <Box className="row">
@@ -219,12 +218,12 @@ export default function VehicleEdit() {
                                     </Box>  
                                 </Box>
                                 
-                                <Box className="col-6">
+                                <Box className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                     <Box className="d-flex flex-column mb-3">
                                         <label className="label-custom mb-2 text-uppercase">Marcas</label>
                                         <Select
                                             error={data.error.vehicle_brand && true}
-                                            value={data.vehicle.vehicle_brand}
+                                            value={data.vehicle.vehicle_brand || 0}
                                             variant="outlined"
                                             onChange={e => {
                                                 dispatch(change({
@@ -251,7 +250,7 @@ export default function VehicleEdit() {
                                     </Box>
                                 </Box>
                                 
-                                <Box className="col-6">
+                                <Box className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                     <Box className="d-flex flex-column mb-3">
                                         <label className="label-custom mb-2 text-uppercase">Modelos</label>
                                         <Select
@@ -283,7 +282,7 @@ export default function VehicleEdit() {
                                     </Box>
                                 </Box>
                                 
-                                <Box className="col-6">
+                                <Box className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                     <Box className="d-flex flex-column mb-3">
                                         <label className="label-custom mb-2 text-uppercase">Ano do modelo</label>
                                         <Select
@@ -312,7 +311,7 @@ export default function VehicleEdit() {
                                     </Box>
                                 </Box>
                                 
-                                <Box className="col-6">
+                                <Box className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                     <Box className="d-flex flex-column mb-3">
                                         <label className="label-custom mb-2 text-uppercase">Versão</label>
                                         <Select
@@ -341,7 +340,7 @@ export default function VehicleEdit() {
                                     </Box>
                                 </Box>
                                 
-                                <Box className="col-6">
+                                <Box className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                     <Box className="d-flex flex-column mb-3">
                                     </Box>
                                 </Box>
