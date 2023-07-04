@@ -371,7 +371,7 @@ export default function VehicleEdit() {
 
                         {/*Aqui é outra sessão*/}
                         {/*Condição vai mostrar os campos se for*/}
-                        {/* {(data.vehicle.vehicle_type === 2020) && */}
+                        {(data.vehicle.vehicle_type === 2020) &&
                         <Box className="col-12">
                             <Box className="d-flex justify-content-center">
                                 <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
@@ -453,7 +453,7 @@ export default function VehicleEdit() {
                                 </Box>
                             </Box>
                         </Box>
-                        {/* } */}
+                        }
 
                         {/* Fim da condição para carros */}
 
@@ -497,6 +497,7 @@ export default function VehicleEdit() {
                                                 <Box className="d-flex flex-column mb-3">
                                                     <label className="label-custom text-uppercase mb-2">Quilometragem</label>
                                                     <TextField
+                                                        variant="outlined"
                                                         type="tel"
                                                         InputProps={{
                                                             inputComponent: NumberFormatCustom,
@@ -504,9 +505,6 @@ export default function VehicleEdit() {
                                                             onChange: text => dispatch({vehicle_mileage: text.target.value})
                                                         }}
                                                     />
-                                                        {data.carcolor.map(item => (
-                                                            <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
-                                                        ))}
                                                 </Box>
                                             </Box>
                                         </Box>
