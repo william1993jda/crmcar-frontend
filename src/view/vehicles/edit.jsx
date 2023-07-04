@@ -143,34 +143,6 @@ export default function VehicleEdit() {
                                                 }
                                             </Box>
                                         </Box>
-                                        {/*<Box className="col-6">*/}
-                                        {/*    <Box className="d-flex flex-column mb-3">*/}
-                                        {/*        <label className="label-custom text-uppercase mb-2">Rua</label>*/}
-                                        {/*        <TextField */}
-                                        {/*            error={data.error.logradouro && true}*/}
-                                        {/*            disabled*/}
-                                        {/*            value={data.vehicle.logradouro || ''}*/}
-                                        {/*            variant="outlined"*/}
-                                        {/*        />*/}
-                                        {/*        {(data.error.logradouro) && */}
-                                        {/*            <strong className="text-danger">{data.error.logradouro[0]}</strong>*/}
-                                        {/*        }*/}
-                                        {/*    </Box>*/}
-                                        {/*</Box>*/}
-                                        {/*<Box className="col-6">*/}
-                                        {/*    <Box className="d-flex flex-column mb-3">*/}
-                                        {/*        <label className="label-custom text-uppercase mb-2">Bairro</label>*/}
-                                        {/*        <TextField */}
-                                        {/*            error={data.error.bairro && true}*/}
-                                        {/*            disabled*/}
-                                        {/*            value={data.vehicle.bairro || ''}*/}
-                                        {/*            variant="outlined"*/}
-                                        {/*        />*/}
-                                        {/*        {(data.error.bairro) && */}
-                                        {/*            <strong className="text-danger">{data.error.bairro[0]}</strong>*/}
-                                        {/*        }*/}
-                                        {/*    </Box>*/}
-                                        {/*</Box>*/}
                                     </Box>
                                 </Box>
                             </Box>
@@ -352,18 +324,20 @@ export default function VehicleEdit() {
 
                         <Box className="col-12">
                             <Box className="d-flex justify-content-center">
-                                <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
-                                    ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
-                                >
                                     <Box className="row">
+                                        {/*Condição vai mostrar os campos se for carro*/}
                                         {(data.vehicle.vehicle_type === 2020) &&
                                             <>
-                                                <Box className="col-12">
+                                                <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
+                                                    ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
+                                                >
+                                                <Box className="col-6">
                                                     <Box className="d-flex flex-column mb-3">
                                                         <label className="label-custom text-uppercase mb-2">Câmbio</label>
                                                         <Select
                                                             value={data.vehicle.vehicle_gearbox || 0}
                                                             onChange={e => dispatch(change({vehicle_gearbox: e.target.valeu}))}
+                                                            variant="outlined"
                                                         >
                                                             {data.gearbox.map(item => (
                                                                 <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
@@ -371,9 +345,89 @@ export default function VehicleEdit() {
                                                         </Select>
                                                     </Box>
                                                 </Box>
+
+                                                <Box className="col-6">
+                                                    <Box className="d-flex flex-column mb-3">
+                                                        <label className="label-custom text-uppercase mb-2">Combustível</label>
+                                                        <Select
+                                                            value={data.vehicle.vehicle_fuel || 0}
+                                                            onChange={e => dispatch(change({vehicle_fuel: e.target.valeu}))}
+                                                            variant="outlined"
+                                                        >
+                                                            {data.fuel.map(item => (
+                                                                <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </Box>
+                                                </Box>
+                                                <Box className="col-6">
+                                                    <Box className="d-flex flex-column mb-3">
+                                                        <label className="label-custom text-uppercase mb-2">Direção</label>
+                                                        <Select
+                                                            value={data.vehicle.vehicle_steering || 0}
+                                                            onChange={e => dispatch(change({vehicle_steering: e.target.valeu}))}
+                                                            variant="outlined"
+                                                        >
+                                                            {data.car_steering.map(item => (
+                                                                <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </Box>
+                                                </Box>
+                                                <Box className="col-6">
+                                                    <Box className="d-flex flex-column mb-3">
+                                                        <label className="label-custom text-uppercase mb-2">Potência do motor</label>
+                                                        <Select
+                                                            value={data.vehicle.vehicle_motorpower || 0}
+                                                            onChange={e => dispatch(change({vehicle_motorpower: e.target.valeu}))}
+                                                            variant="outlined"
+                                                        >
+                                                            {data.motorpower.map(item => (
+                                                                <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </Box>
+                                                </Box>
+                                                <Box className="col-6">
+                                                    <Box className="d-flex flex-column mb-3">
+                                                        <label className="label-custom text-uppercase mb-2">Portas</label>
+                                                        <Select
+                                                            value={data.vehicle.vehicle_doors || 0}
+                                                            onChange={e => dispatch(change({vehicle_doors: e.target.valeu}))}
+                                                            variant="outlined"
+                                                        >
+                                                            {data.doors.map(item => (
+                                                                <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </Box>
+                                                </Box>
+                                                </Box>
                                             </>
                                         }
+
+                                        {/* Inicio Mostra se for moto */}
+                                        {(data.vehicle_type === 2060) &&
+                                        <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
+                                            ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
+                                        >
+                                            <Box className="col-6">
+                                                <Box className="d-flex flex-column mb-3">
+                                                    <label className="label-custom text-uppercase mb-2">Cilindradas</label>
+                                                    <Select
+                                                        value={data.vehicle.vehicle_cubiccms || 0}
+                                                        onChange={e => dispatch(change({vehicle_cubiccms: e.target.valeu}))}
+                                                        variant="outlined"
+                                                    >
+                                                        {data.cubiccms.map(item => (
+                                                            <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </Box>
+                                            </Box>
+                                        
                                     </Box>
+                                    }
                                 </Box>
                             </Box>
                         </Box>
