@@ -407,7 +407,7 @@ export default function VehicleEdit() {
                                         }
 
                                         {/* Inicio Mostra se for moto */}
-                                        {(data.vehicle_type === 2060) &&
+                                        {(data.vehicle.vehicle_type === 2060) &&
                                         <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
                                             ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
                                         >
