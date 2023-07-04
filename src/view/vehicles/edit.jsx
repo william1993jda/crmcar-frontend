@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Header from "../header"
 import { useParams } from "react-router-dom";
-import { Box, TextField, CircularProgress, InputAdornment, Select, MenuItem } from "@material-ui/core";
+import { Box, TextField, CircularProgress, InputAdornment, Select, MenuItem, FormControlLabel, Checkbox } from "@material-ui/core";
 import Progress from "../components/progress";
 import { store, show, change, cep, brand, model, version } from "../../store/actions/vehicles.action";
 import { useDispatch, useSelector } from "react-redux";
@@ -209,7 +209,7 @@ export default function VehicleEdit() {
                                                 <label className="label-custom text-uppercase mb-2">Categoria</label>
                                                 <Select
                                                     error={data.error.vehicle_type && true}
-                                                    value={data.vehicle.vehicle_type || 0}
+                                                    value={data.vehicle.vehicle_type || ''}
                                                     variant="outlined"
                                                     onChange={e => {
                                                         dispatch(change({
@@ -247,7 +247,7 @@ export default function VehicleEdit() {
                                                 <label className="label-custom mb-2 text-uppercase">Marcas</label>
                                                 <Select
                                                     error={data.error.vehicle_brand && true}
-                                                    value={data.vehicle.vehicle_brand || 0}
+                                                    value={data.vehicle.vehicle_brand || ''}
                                                     variant="outlined"
                                                     onChange={e => {
                                                         dispatch(change({
@@ -262,7 +262,6 @@ export default function VehicleEdit() {
                                                         }
                                                     }}
                                                 >
-
                                                     {data.vehicle_brand.map(item => (
                                                         <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
                                                     ))}
@@ -279,7 +278,7 @@ export default function VehicleEdit() {
                                                 <label className="label-custom mb-2 text-uppercase">Modelos</label>
                                                 <Select
                                                     error={data.error.vehicle_model && true}
-                                                    value={data.vehicle.vehicle_model || 0}
+                                                    value={data.vehicle.vehicle_model || ''}
                                                     variant="outlined"
                                                     onChange={e => {
                                                         dispatch(change({
@@ -311,7 +310,7 @@ export default function VehicleEdit() {
                                                 <label className="label-custom mb-2 text-uppercase">Ano do modelo</label>
                                                 <Select
                                                     error={data.error.vehicle_regdate && true}
-                                                    value={data.vehicle.vehicle_regdate || 0}
+                                                    value={data.vehicle.vehicle_regdate || ''}
                                                     variant="outlined"
                                                     onChange={e => {
                                                         dispatch(change({
@@ -340,7 +339,7 @@ export default function VehicleEdit() {
                                                 <label className="label-custom mb-2 text-uppercase">Versão</label>
                                                 <Select
                                                     error={data.error.vehicle_version && true}
-                                                    value={data.vehicle.vehicle_version || 0}
+                                                    value={data.vehicle.vehicle_version || ''}
                                                     variant="outlined"
                                                     onChange={e => {
                                                         dispatch(change({
@@ -382,7 +381,7 @@ export default function VehicleEdit() {
                                             <Box className="d-flex flex-column mb-3">
                                                 <label className="label-custom text-uppercase mb-2">Câmbio</label>
                                                 <Select
-                                                    value={data.vehicle.vehicle_gearbox || 0}
+                                                    value={data.vehicle.vehicle_gearbox || ''}
                                                     onChange={e => dispatch(change({vehicle_gearbox: e.target.valeu}))}
                                                     variant="outlined"
                                                 >
@@ -397,7 +396,7 @@ export default function VehicleEdit() {
                                             <Box className="d-flex flex-column mb-3">
                                                 <label className="label-custom text-uppercase mb-2">Combustível</label>
                                                 <Select
-                                                    value={data.vehicle.vehicle_fuel || 0}
+                                                    value={data.vehicle.vehicle_fuel || ''}
                                                     onChange={e => dispatch(change({vehicle_fuel: e.target.valeu}))}
                                                     variant="outlined"
                                                 >
@@ -411,7 +410,7 @@ export default function VehicleEdit() {
                                             <Box className="d-flex flex-column mb-3">
                                                 <label className="label-custom text-uppercase mb-2">Direção</label>
                                                 <Select
-                                                    value={data.vehicle.vehicle_steering || 0}
+                                                    value={data.vehicle.vehicle_steering || ''}
                                                     onChange={e => dispatch(change({vehicle_steering: e.target.valeu}))}
                                                     variant="outlined"
                                                 >
@@ -425,7 +424,7 @@ export default function VehicleEdit() {
                                             <Box className="d-flex flex-column mb-3">
                                                 <label className="label-custom text-uppercase mb-2">Potência do motor</label>
                                                 <Select
-                                                    value={data.vehicle.vehicle_motorpower || 0}
+                                                    value={data.vehicle.vehicle_motorpower || ''}
                                                     onChange={e => dispatch(change({vehicle_motorpower: e.target.valeu}))}
                                                     variant="outlined"
                                                 >
@@ -439,7 +438,7 @@ export default function VehicleEdit() {
                                             <Box className="d-flex flex-column mb-3">
                                                 <label className="label-custom text-uppercase mb-2">Portas</label>
                                                 <Select
-                                                    value={data.vehicle.vehicle_doors || 0}
+                                                    value={data.vehicle.vehicle_doors || ''}
                                                     onChange={e => dispatch(change({vehicle_doors: e.target.valeu}))}
                                                     variant="outlined"
                                                 >
@@ -469,7 +468,7 @@ export default function VehicleEdit() {
                                                 <Box className="d-flex flex-column mb-3">
                                                     <label className="label-custom text-uppercase mb-2">Cilindradas</label>
                                                     <Select
-                                                        value={data.vehicle.vehicle_cubiccms || 0}
+                                                        value={data.vehicle.vehicle_cubiccms || ''}
                                                         onChange={e => dispatch(change({vehicle_cubiccms: e.target.valeu}))}
                                                         variant="outlined"
                                                     >
@@ -483,7 +482,7 @@ export default function VehicleEdit() {
                                                 <Box className="d-flex flex-column mb-3">
                                                     <label className="label-custom text-uppercase mb-2">Cor</label>
                                                     <Select
-                                                        value={data.vehicle.vehicle_color || 0}
+                                                        value={data.vehicle.vehicle_color || ''}
                                                         onChange={e => dispatch(change({vehicle_color: e.target.valeu}))}
                                                         variant="outlined"
                                                     >
@@ -513,6 +512,41 @@ export default function VehicleEdit() {
                             </Box>
                         }
                         {/* Fim da condição para moto */}
+                        <Box className="col-12">
+                                <Box className="d-flex justify-content-center">
+                                    <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
+                                        ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
+                                    >
+                                        <h3>Dados do veículo</h3>
+                                        <Box className="row">
+                                            {data.features.map(item => (item.vehicle_type_id === data.vehicle.vehicle_type) && (
+                                                <Box className="col-6" key={item.id}>
+                                                    <Box className="d-flex flex-column mb-3">
+                                                        <FormControlLabel 
+                                                            control={
+                                                                <Checkbox 
+                                                                    checked={data.vehicle.vehicle_features[item.velue] ? true: false}
+                                                                    onChange={() => {
+                                                                        let checked = data.vehicle.vehicle_features[item.velue]?
+                                                                        delete data.vehicle.vehicle_features[item.velue] :
+                                                                        {[item.value] : item}
+                                                                        dispatch(change({vehicle_features: {
+                                                                            ...data.vehicle.vehicle_features,
+                                                                            ...checked
+                                                                        }}))
+                                                                    }}
+                                                                />
+                                                            }
+                                                            label={item.label}
+                                                        />
+                                                    </Box>
+                                                </Box>
+                                            ))}
+                                            
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
                     </Box>
                 </Box>
             }
