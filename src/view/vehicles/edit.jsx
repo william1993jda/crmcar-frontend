@@ -497,8 +497,7 @@ export default function VehicleEdit() {
                                                 <Box className="d-flex flex-column mb-3">
                                                     <label className="label-custom text-uppercase mb-2">Quilometragem</label>
                                                     <TextField
-                                                    type="tel"
-                                                        value={data.vehicle.vehicle_color || 0}
+                                                        type="tel"
                                                         InputProps={{
                                                             inputComponent: NumberFormatCustom,
                                                             value: data.vehicle.vehicle_mileage || '',
