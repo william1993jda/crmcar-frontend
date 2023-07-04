@@ -502,7 +502,7 @@ export default function VehicleEdit() {
                                                         InputProps={{
                                                             inputComponent: NumberFormatCustom,
                                                             value: data.vehicle.vehicle_mileage || '',
-                                                            onChange: text => dispatch({vehicle_mileage: text.target.value})
+                                                            onChange: text => dispatch(change({vehicle_mileage: text.target.value}))
                                                         }}
                                                     />
                                                 </Box>
