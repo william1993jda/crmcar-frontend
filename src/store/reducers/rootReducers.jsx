@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     alertReducer,
     oauthReducer,
     registerReducer,
-    vehiclesReducer,
+    vehiclesReducer
 })
 
 export default rootReducer

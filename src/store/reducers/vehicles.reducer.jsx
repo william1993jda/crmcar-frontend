@@ -8,6 +8,7 @@ const initialState = {
     vehicle_brand: [],
     vehicle_model: [],
     vehicle_version: [],
+    upload_photo: false,
     success: false,
     error: {}
 }
@@ -40,6 +41,35 @@ export default (state = initialState, { type, payload, isLoadMore }) => {
             ...payload
           }
         }
+
+        case actionTypes.UPLOAD_PHOTO:
+          return {
+              ...state,
+              vehicle: {
+                  ...state.vehicle,
+                  vehicle_photos: [
+                      ...state.vehicle.vehicle_photos.concat(payload)
+                  ]
+              }
+          }
+
+          case actionTypes.DELETE_PHOTO:
+            return {
+              ...state,
+              vehicle: {
+                ...state.vehicle,
+                vehicle_photos: state.vehicle.vechicle_photos.filter(item => item.id !== payload)
+              }
+            }
+
+            case actionTypes.REODER_PHOTO:
+              return {
+                ...state,
+                vehicle: {
+                  ...state.vehicle,
+                  vehicle_photos: payload
+                }
+              }
 
         case actionTypes.SUCCESS:
           return {

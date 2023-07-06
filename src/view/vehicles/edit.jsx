@@ -3,10 +3,26 @@ import Header from "../header"
 import { useParams } from "react-router-dom";
 import { Box, TextField, CircularProgress, InputAdornment, Select, MenuItem, FormControlLabel, Checkbox } from "@material-ui/core";
 import Progress from "../components/progress";
-import { store, show, change, cep, brand, model, version } from "../../store/actions/vehicles.action";
+import { store, show, change, cep, brand, model, version, uploadPhoto, deletePhoto, reorderPhoto } from "../../store/actions/vehicles.action";
 import { useDispatch, useSelector } from "react-redux";
 import MaskedInput from "react-text-mask";
 import NumberFormat from "react-number-format";
+import {arrayMoveImmutable} from "array-move";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { rootUrl } from "../../config/App";
+import { FaTrash } from 'react-icons/fa'
+import { Confirm } from '../components'
+import './vehicle.css'
+
+
+
+const SortableItem = SortableElement(({value}) => 
+    <Box className="bg-img" style={{backgroundImage: `url('${rootUrl}thumb/vehicles/${value.img}?u=${value.user_id}&s=${value.vehicle_id}&h=250&w=250')`}}></Box>
+)
+
+const SortableList = SortableContainer(({children}) => {
+    return <Box className="row">{children}</Box>
+})
 
 const TextMaskCustom = (props) => {
     const { inputRef, ...other } = props
@@ -81,7 +97,33 @@ export default function VehicleEdit() {
         }
 
         index()
-    }, [])
+    }, [dispatch, states.vehicle_id])
+
+    const handleUpload = (e) => {
+        [...e.target.files].map(img => {
+            const body = new FormData();
+            body.append('file', img);
+            body.append('id', data.vehicle.id);
+            return dispatch(uploadPhoto(body));
+        })
+        if(data.error.photos && delete data.error.photos);
+    }
+
+    const _deletePhoto = (id) => {
+        setStates({ isDeleted: id })
+        dispatch(deletePhoto(id)).then(res => res && setStates({isDeleted: null}))
+    }
+
+    const handleConfirm = e => {
+        setStates({confirmEl: e.currentTarget})
+    }
+
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        let items = arrayMoveImmutable(data.vehicle.vehicle_photos, oldIndex, newIndex)
+
+        let order = items.map(({id}) =>id)
+        dispatch(reorderPhoto({order: order}, items))
+    }
 
     return (
         <>
@@ -92,7 +134,7 @@ export default function VehicleEdit() {
                         <Box className="col-12">
                             <Box className="d-flex justify-content-center">
                                 <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
-                        ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}>
+                                    ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}>
                                     <h3>Localização do veículo</h3>
                                     <Box className="row">
                                         <Box className="col-12">
@@ -370,7 +412,7 @@ export default function VehicleEdit() {
 
                         {/*Aqui é outra sessão*/}
                         {/*Condição vai mostrar os campos se for*/}
-                        {(data.vehicle.vehicle_type === 2020) &&
+                        {(!data.vehicle.vehicle_type === 2020) &&
                         <Box className="col-12">
                             <Box className="d-flex justify-content-center">
                                 <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
@@ -457,7 +499,7 @@ export default function VehicleEdit() {
                         {/* Fim da condição para carros */}
 
                         {/* Inicio da condição para moto */}
-                         {(data.vehicle.vehicle_type === 2060) &&
+                         {(!data.vehicle.vehicle_type === 2060) &&
                             <Box className="col-12">
                                 <Box className="d-flex justify-content-center">
                                     <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
@@ -513,25 +555,61 @@ export default function VehicleEdit() {
                         }
                         {/* Fim da condição para moto */}
                         <Box className="col-12">
+                            <Box className="d-flex justify-content-center">
+                                <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
+                                    ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
+                                >
+                                    <h3>Dados do veículo</h3>
+                                    <Box className="row">
+                                        {data.features.map(item => (item.vehicle_type_id === data.vehicle.vehicle_type) && (
+                                            <Box className="col-6" key={item.id}>
+                                                <Box className="d-flex flex-column mb-3">
+                                                    <FormControlLabel
+                                                        control={
+                                                            <Checkbox
+                                                                checked={data.vehicle.vehicle_features[item.value] ? true : false}
+                                                                onChange={() => {
+                                                                    let checked = data.vehicle.vehicle_features[item.value] ? 
+                                                                        delete data.vehicle.vehicle_features[item.value] : 
+                                                                        {[item.value] : item}
+                                                                    dispatch(change({ vehicle_features: {
+                                                                        ...data.vehicle.vehicle_features,
+                                                                        ...checked
+                                                                    } }))
+                                                                }}
+                                                            />
+                                                        }
+                                                        label={item.label}
+                                                    />
+                                                </Box>
+                                            </Box>
+                                        ))} 
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+                        {(!data.vehicle.vehicle_type) &&       
+                            <Box className="col-12">
                                 <Box className="d-flex justify-content-center">
                                     <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
                                         ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
                                     >
-                                        <h3>Dados do veículo</h3>
+                                        <h3>Financeiro</h3>
                                         <Box className="row">
-                                            {data.features.map(item => (item.vehicle_type_id === data.vehicle.vehicle_type) && (
+                                            <label className="label-custom text-uppercase mb-2">Estado financeiro</label>
+                                            {data.financial.map(item => (
                                                 <Box className="col-6" key={item.id}>
                                                     <Box className="d-flex flex-column mb-3">
                                                         <FormControlLabel
                                                             control={
                                                                 <Checkbox
-                                                                    checked={data.vehicle.vehicle_features[item.value] ? true : false}
+                                                                    checked={data.vehicle.vehicle_financial[item.value] ? true : false}
                                                                     onChange={() => {
-                                                                        let checked = data.vehicle.vehicle_features[item.value] ? 
-                                                                            delete data.vehicle.vehicle_features[item.value] : 
+                                                                        let checked = data.vehicle.vehicle_financial[item.value] ? 
+                                                                            delete data.vehicle.vehicle_financial[item.value] : 
                                                                             {[item.value] : item}
-                                                                        dispatch(change({ vehicle_features: {
-                                                                            ...data.vehicle.vehicle_features,
+                                                                            dispatch(change({ vehicle_financial: {
+                                                                            ...data.vehicle.vehicle_financial,
                                                                             ...checked
                                                                         } }))
                                                                     }}
@@ -546,6 +624,135 @@ export default function VehicleEdit() {
                                     </Box>
                                 </Box>
                             </Box>
+                        }
+
+                        <Box className="col-12">
+                            <Box className="d-flex justify-content-center">
+                                <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
+                                    ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
+                                >
+                                    <h3>Financeiro</h3>
+                                    <Box className="row">
+                                        <label className="label-custom text-uppercase mb-2">Estado financeiro</label>
+                                        <Box className="col-6">
+                                            <Box className="d-flex flex-column mb-3">
+                                                <TextField
+                                                    type="tel"
+                                                    name="R$ "
+                                                    variant="outlined"
+                                                    InputProps={{
+                                                        inputComponent: NumberFormatCustom,
+                                                        value: data.vehicle.vehicle_price || '',
+                                                        onChange: text => {
+                                                            dispatch(change({vehicle_price: text.target.value}))
+                                                            if(data.error.vehicle_price) {
+                                                                delete data.error.vehicle_price
+                                                            }
+                                                        }
+                                                    }}
+                                                />
+                                                {(data.error.vehicle_price) &&
+                                                    <strong className="text-danger">{data.error.vehicle_price[0]}</strong>                                               
+                                                }
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        <Box className="col-12">
+                            <Box className="d-flex justify-content-center">
+                                <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
+                                    ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
+                                >
+                                    <h3>Descrição do anuncio</h3>
+                                    <Box className="row">
+                                        <Box className="col-6">
+                                            <Box className="d-flex flex-column mb-3">
+                                                <label className="label-custom text-uppercase mb-2">Titulo</label>
+                                                <TextField
+                                                    variant="outlined"
+                                                    velue={data.vehicle.title || ''}
+                                                    onChange={text => dispatch(change({title: text.target.value}))}
+                                                />
+                                            </Box>
+                                            <Box className="d-flex flex-column mb-3">
+                                                <label className="label-custom text-uppercase mb-2">Descrição</label>
+                                                <TextField
+                                                    multiline
+                                                    maxRows={5}
+                                                    variant="outlined"
+                                                    velue={data.vehicle.description || ''}
+                                                    onChange={text => dispatch(change({title: text.target.value}))}
+                                                />
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box className="col-12">
+                            <Box className="d-flex justify-content-center">
+                                <Box className={`card-content bg-light mb-3 py-2 px-3 rounded border border-dark-subtle 
+                                    ${window.innerWidth < 577 || window.innerHeight < 577 ? 'w-100': 'w-50'}`}
+                                >
+                                    <h3>Fotos</h3>
+                                    <Box className="row">
+                                        <Box className="col-6">
+                                            <Box className="d-flex flex-column mb-3">
+                                                <label className="label-custom text-uppercase mb-2">Ordenar fotos</label>
+                                                {(data.error.photos) &&
+                                                    <strong className="text-danger">{data.error.phots[0]}</strong>
+                                                }
+
+                                                <SortableList axis="xy" onSortEnd={onSortEnd}>
+                                                    {data.vehicle.vehicle_photos.map((item, index) => (
+                                                        <Box className="col-6 col-md-4" key={item.id}>
+                                                            <Box className="box-image d-flex justify-content-center align-items-center mt-3">
+                                                                {(states.isDeleted === item.id) ? <CircularProgress size={30} color="secundary"/> : 
+                                                                    <>
+                                                                        <span id={item.id} onClick={handleConfirm} className="d-flex justify-content-center align-items-center">
+                                                                            <Box className="app-icon d-flex">
+                                                                                <FaTrash color="#fff" size="1.2em" />
+                                                                            </Box>
+                                                                        </span>
+                                                                        <SortableItem
+                                                                            key={`item-${item.id}`}
+                                                                            index={index}
+                                                                            value={item}
+                                                                        />
+                                                                        {(Boolean(states.confirmEl))&& 
+                                                                            <Confirm 
+                                                                                open={(item.id === parseInt(states.confirmEl.id))}
+                                                                                onConfirm={() => _deletePhoto(item.id)}
+                                                                                onClose={() => setStates({confirmEl: null})}
+                                                                            />
+                                                                        }
+                                                                    </>
+                                                                }
+                                                            </Box>
+                                                        </Box>
+                                                    ))}
+
+                                                    <Box className="col-6 col-md-4">
+                                                        <Box className="box-image box-upload d-flex justify-content-center align-items-center mt-3">
+                                                            <input onChange={handleUpload} type="file" multiple name="file" className="file-input" />
+                                                            {(data.upload_photo)? <CircularProgress />:
+                                                                <p className="box-text">
+                                                                    <span className="text-plus">+</span>
+                                                                    <span>Adicionar fotos</span>
+                                                                </p>
+                                                            }
+                                                        </Box>
+                                                    </Box>
+                                                </SortableList>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
                     </Box>
                 </Box>
             }

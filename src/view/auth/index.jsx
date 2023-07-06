@@ -45,6 +45,7 @@ export default function Auth() {
                             onChange={text => dispatch(changeOauth({password: text.target.value}))}
                             variant="outlined"
                         />
+
                         <Button
                             variant="contained"
                             color="primary"
@@ -66,7 +67,7 @@ export default function Auth() {
                         </RegisterButton>
                         {success && <Navigate to="/vehicles" />}
                     </Box>
-                    <Link to='/vehicles/create'>Acessar o teste</Link>
+                    <Link to='/vehicles/create'>Acessar o teste </Link>
                 </Box>
             </Box>
         </Box>
